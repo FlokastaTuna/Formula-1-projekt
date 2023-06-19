@@ -5,14 +5,22 @@
 #include "header.h"
 
 int main(void) {
-	int n;
+	int n, a;
 	FORMULA *F;
 	printf("Za koliko bolida zelite unositi podatke? ");
 	scanf("%d", &n);
 	getchar();
 	zapisivanjeFormule("formula.bin", n);
 	F = citajFormule("formula.bin", n);
-	//ovdje dodajem funkciju po kojoj pretrazujem datoteku
+	printf("Zelis li pretraziti unesene bolide pomocu jednog od unesenog podatka? 1 za da, 2 za ne :");
+	scanf("%d", &a);
+	if (a == 1) {
+		pretrazivanjeFormule(F,n);//ovdje dodajem funkciju po kojoj pretrazujem datoteku
+	}
+	else {
+		printf("Tvoj izbor");
+	}
+	
 	F = sloboda(F);
 	return 0;
 }

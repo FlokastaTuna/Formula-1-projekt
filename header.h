@@ -18,6 +18,6 @@ typedef struct formula {
 FORMULA* sloboda(FORMULA* F);
 FORMULA* citajFormule(char* file, int n);
 void zapisivanjeFormule(char* file, int n);
-// ovdje ide funkcija za pretrazivanje
+void pretrazivanjeFormule(FORMULA* formula, int n);
 
 #endif
