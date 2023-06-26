@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <time.h>
 #include "header.h"
@@ -60,7 +61,7 @@ void zapisivanjeFormule(char* file, int n) {
 		printf("I na poslijetku, stotinke:");
 		scanf("%d", &temp[i].vrijeme.stot);
 		getchar();
-		if (temp[i].vrijeme.min == 1 && temp[i].vrijeme.sec < 60 && temp[i].vrijeme.stot < 60) {
+		if (temp[i].vrijeme.min == 1 && temp[i].vrijeme.sec < 60 && temp[i].vrijeme.stot < 100) {
 			break;
 		}
 		else {
@@ -379,45 +380,6 @@ void kopirajDatoteku(char* pocetna, char* nova) {
 	printf("Uspjesno kopiranje datoteke, kopirana datoteka se zove nova_formula.bin \n");
 }
 
-//RADI
-FORMULA* obrisiFormulu(FORMULA* formula, int n, char* file) {
-	int bolidToDelete;
-	printf("Unesite broj bolida za brisanje: ");
-	scanf("%d", &bolidToDelete);
-
-	FILE* originalFile = fopen(file, "rb");
-	if (originalFile == NULL) {
-		printf("Greška prilikom otvaranja datoteke.\n");
-		return formula;
-	}
-
-	FILE* tempFile = fopen("temp.bin", "wb");
-	if (tempFile == NULL) {
-		printf("Greška prilikom otvaranja privremene datoteke.\n");
-		fclose(originalFile);
-		return formula;
-	}
-
-	int formulasWritten = 0;
-	for (int i = 0; i < n; i++) {
-		if (formula[i].bolid_broj == bolidToDelete) {
-			printf("Formula kojoj je bolid broj %d je obrisana.\n", formula[i].bolid_broj);
-		}
-		else {
-			fwrite(&formula[i], sizeof(FORMULA), 1, tempFile);
-			formulasWritten++;
-		}
-	}
-
-	fclose(originalFile);
-	fclose(tempFile);
-
-	remove(file);
-	rename("temp.bin", file);
-
-	FORMULA* updatedFormula = citajFormule(file, formulasWritten);
-	return updatedFormula;
-}
 
 //RADI
 void sortirajFormule(char* file) {
@@ -482,6 +444,21 @@ FORMULA* sloboda(FORMULA* F) {
 	return NULL;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //RADI DONEKLE (DODA KAKO SPADA U DATOTEKU) ALI AKO NAKON TOGA PROBAM SORTIRAT ILI TRAZIT DODANU FORMULU GLUPOSTI LETE
 void dodavanjeFormule(char* file) {
 	int n;
@@ -529,7 +506,7 @@ void dodavanjeFormule(char* file) {
 			printf("I na poslijetku, stotinke:");
 			scanf("%d", &temp[i].vrijeme.stot);
 			getchar();
-			if (temp[i].vrijeme.min == 1 && temp[i].vrijeme.sec < 60 && temp[i].vrijeme.stot < 60) {
+			if (temp[i].vrijeme.min == 1 && temp[i].vrijeme.sec < 60 && temp[i].vrijeme.stot < 100) {
 				break;
 			}
 			else {
@@ -547,7 +524,47 @@ void dodavanjeFormule(char* file) {
 	}
 
 	fwrite(temp, sizeof(FORMULA), n, pFile);
+	fwrite(&n, sizeof(int), 1, pFile);
 	fclose(pFile);
 	free(temp);
 }
 
+//RADI AKO BRISEM JEDNOM
+FORMULA* obrisiFormulu(FORMULA* formula, int n, char* file) {
+	int bolidToDelete;
+	printf("Unesite broj bolida za brisanje: ");
+	scanf("%d", &bolidToDelete);
+
+	FILE* originalFile = fopen(file, "rb");
+	if (originalFile == NULL) {
+		printf("Greška prilikom otvaranja datoteke.\n");
+		return formula;
+	}
+
+	FILE* tempFile = fopen("temp.bin", "wb");
+	if (tempFile == NULL) {
+		printf("Greška prilikom otvaranja privremene datoteke.\n");
+		fclose(originalFile);
+		return formula;
+	}
+
+	int formulasWritten = 0;
+	for (int i = 0; i < n; i++) {
+		if (formula[i].bolid_broj == bolidToDelete) {
+			printf("Formula kojoj je bolid broj %d je obrisana.\n", formula[i].bolid_broj);
+		}
+		else {
+			fwrite(&formula[i], sizeof(FORMULA), 1, tempFile);
+			formulasWritten++;
+		}
+	}
+
+	fclose(originalFile);
+	fclose(tempFile);
+
+	remove(file);
+	rename("temp.bin", file);
+
+	FORMULA* updatedFormula = citajFormule(file, formulasWritten);
+	return updatedFormula;
+}

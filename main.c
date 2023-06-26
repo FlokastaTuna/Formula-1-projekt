@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 #include "header.h"
 
@@ -24,9 +25,9 @@ int main(void) {
 		printf("IZBORNIK: \n");
 		printf("Trazi formulu: 1\n");
 		printf("Azuriraj formulu: 2\n");
-		printf("Dodaj novu formulu: 3\n");
+		//printf("Dodaj novu formulu: 3\n");
 		printf("Sortiraj formule po ostvarenom vremenu: 4\n");
-		printf("Obrisi jednu od dodanih formula: 5\n");
+		//printf("Obrisi jednu od dodanih formula: 5\n");
 		printf("Obrisi datoteku: 6\n");
 		printf("Preimenuj datoteku: 7\n");
 		printf("Kopiraj datoteku: 8\n");
@@ -44,18 +45,18 @@ int main(void) {
 		printf("--------------------\n");
 		azuriranjeFormule(file, n);
 		break; }
-	case 3: {
+	/*case 3: {
 		printf("--------------------\n");
 		dodavanjeFormule(file);
-		break; }
+		break; }*/
 	case 4: {
 		printf("--------------------\n");
 		sortirajFormule(file);
 		break; }
-	case 5: {
+	/*case 5: {
 		printf("--------------------\n");
 		F = obrisiFormulu(F, n, file);
-		break; }
+		break; }*/
 	case 6: {
 		printf("--------------------\n");
 		obrisiDatoteku(file);

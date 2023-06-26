@@ -22,8 +22,8 @@ void pretrazivanjeFormule(FORMULA* formula, int n);
 void azuriranjeFormule(char* file, int n);
 void obrisiDatoteku(const char* file);
 void preimenujDatoteku(const char*);
-void kopirajDatoteku(char*, char*);
+//void kopirajDatoteku(char*, char*);
 FORMULA* obrisiFormulu(FORMULA* formula, int n, char* file);
 void sortirajFormule(char*);
-void dodavanjeFormule(char*);
+//void dodavanjeFormule(char*);
 #endif
