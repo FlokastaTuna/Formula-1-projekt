@@ -19,5 +19,11 @@ FORMULA* sloboda(FORMULA* F);
 FORMULA* citajFormule(char* file, int n);
 void zapisivanjeFormule(char* file, int n);
 void pretrazivanjeFormule(FORMULA* formula, int n);
-
+void azuriranjeFormule(char* file, int n);
+void obrisiDatoteku(const char* file);
+void preimenujDatoteku(const char*);
+void kopirajDatoteku(char*, char*);
+FORMULA* obrisiFormulu(FORMULA* formula, int n, char* file);
+void sortirajFormule(char*);
+void dodavanjeFormule(char*);
 #endif
