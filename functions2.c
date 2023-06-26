@@ -296,12 +296,12 @@ void kopirajDatoteku(char* pocetna, char* nova) {
 	while ((bytesRead = fread(buffer, 1, bufferSize, source)) > 0) {
 		fwrite(buffer, 1, bytesRead, destination);
 	}
-
+	printf("Uspjesno kopiranje datoteke, kopirana datoteka se zove nova_formula.bin \n");
 	free(buffer);
 	fclose(source);
 	fclose(destination);
 
-	printf("Uspjesno kopiranje datoteke, kopirana datoteka se zove nova_formula.bin \n");
+
 }
 
 //RADI
@@ -312,13 +312,13 @@ FORMULA* obrisiFormulu(FORMULA* formula, int n, char* file) {
 
 	FILE* originalFile = fopen(file, "rb");
 	if (originalFile == NULL) {
-		printf("Greška prilikom otvaranja datoteke.\n");
+		printf("GreÂška prilikom otvaranja datoteke.\n");
 		return formula;
 	}
 
 	FILE* tempFile = fopen("temp.bin", "wb");
 	if (tempFile == NULL) {
-		printf("Greška prilikom otvaranja privremene datoteke.\n");
+		printf("GreÂška prilikom otvaranja privremene datoteke.\n");
 		fclose(originalFile);
 		return formula;
 	}
